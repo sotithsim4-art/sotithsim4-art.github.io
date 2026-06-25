@@ -282,3 +282,36 @@ nav a:hover {
   color: var(--accent2);
   text-align: right;
 }
+
+/* CERTIFICATIONS */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.cert-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.cert-issuer {
+  color: var(--accent2);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.cert-name {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.cert-status {
+  color: var(--green);
+  font-size: 0.8rem;
+}
