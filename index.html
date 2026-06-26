@@ -5,24 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SOC Portfolio | Sotith Sim</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
 </head>
 <body>
-
-  <!-- STAGE 1: TERMINAL -->
-  <div id="stage1" class="loader-stage">
-    <div class="s1-window">
-      <div class="s1-bar">
-        <span class="s1-dot s1-red"></span>
-        <span class="s1-dot s1-yellow"></span>
-        <span class="s1-dot s1-green"></span>
-        <span class="s1-title">SOTITH@SOC-NODE: ~/SECURE</span>
-        <span class="s1-sudo">SUDO SESSION</span>
-      </div>
-      <div class="s1-body" id="s1-output"></div>
-    </div>
-    <div class="s1-caption" id="s1-caption"></div>
-  </div>
 
   <aside class="sidebar">
     <div class="logo">CYBERSEC</div>
@@ -190,47 +174,6 @@
     </section>
 
   </main>
-
-  <script>
-    // STAGE 1
-    const s1lines = [
-      { text: "sotith@soc:~$ cd ~/secure", color: "#00ff41" },
-      { text: "sotith@soc:~$ ls", color: "#00ff41" },
-      { text: "phishing_detector.py   login_monitor.py   port_scanner.py   file_integrity.py", color: "#00cc33" },
-      { text: "sotith@soc:~$ sudo ./launch_soc.sh --analyst sotith-sim", color: "#00ff41" },
-    ];
-    const s1cap = "Launching analyst session... handing off to SOC dashboard.";
-    const s1out = document.getElementById("s1-output");
-    const s1caption = document.getElementById("s1-caption");
-    let s1l = 0, s1c = 0, s1html = "";
-
-    function typeS1() {
-      if (s1l >= s1lines.length) {
-        s1caption.textContent = s1cap;
-        setTimeout(endS1, 1500);
-        return;
-      }
-      const line = s1lines[s1l];
-      if (s1c < line.text.length) {
-        s1c++;
-        s1out.innerHTML = s1html + `<span style="color:${line.color}">${line.text.substring(0, s1c)}</span>`;
-        setTimeout(typeS1, 28);
-      } else {
-        s1html += `<span style="color:${line.color}">${line.text}</span><br/>`;
-        s1out.innerHTML = s1html;
-        s1c = 0; s1l++;
-        setTimeout(typeS1, 450);
-      }
-    }
-
-    function endS1() {
-      const el = document.getElementById("stage1");
-      el.classList.add("out");
-      setTimeout(() => el.classList.add("gone"), 800);
-    }
-
-    setTimeout(typeS1, 600);
-  </script>
 
   <script>
     const lines = [
