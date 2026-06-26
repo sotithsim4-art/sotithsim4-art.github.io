@@ -55,6 +55,19 @@
       </div>
     </section>
 
+    <section class="terminal-section">
+      <div class="terminal-header">
+        <span class="terminal-title">ANALYST TERMINAL</span>
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+      </div>
+      <div class="terminal-body">
+        <div id="terminal-output"></div>
+        <span class="terminal-cursor">█</span>
+      </div>
+    </section>
+
     <section class="hero-image-section">
       <div class="hero-image-wrapper">
         <img src="hero.jpg" alt="Cybersecurity SOC Analyst" class="hero-img" />
@@ -162,5 +175,43 @@
 
   </main>
 
+  <script>
+    const lines = [
+      "sotith@soc:~$ whoami",
+      "sotith-sim -- SOC Analyst | Army Veteran | Cybersecurity",
+      "sotith@soc:~$ ls certifications/",
+      "CompTIA_Security+  CompTIA_Linux+  Splunk_User  ISC2_CC",
+      "sotith@soc:~$ python3 phishing_detector.py",
+      "Scanning email headers...",
+      "ALERT: Suspicious domain detected -- paypa1.com",
+      "Verdict: LIKELY PHISHING",
+      "sotith@soc:~$ status",
+      "System secure. Monitoring active. Ready to defend.",
+    ];
+
+    const output = document.getElementById("terminal-output");
+    let lineIndex = 0;
+    let charIndex = 0;
+    let currentLine = "";
+
+    function type() {
+      if (lineIndex >= lines.length) return;
+      const line = lines[lineIndex];
+      if (charIndex < line.length) {
+        currentLine += line[charIndex];
+        output.innerHTML = output.innerHTML.replace(/<span[^>]*>[^<]*<\/span>$/, "") + currentLine;
+        charIndex++;
+        setTimeout(type, 35);
+      } else {
+        output.innerHTML += "<br/>";
+        currentLine = "";
+        charIndex = 0;
+        lineIndex++;
+        setTimeout(type, 400);
+      }
+    }
+
+    setTimeout(type, 800);
+  </script>
 </body>
 </html>
