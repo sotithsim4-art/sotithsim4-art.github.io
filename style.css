@@ -378,6 +378,45 @@ nav a:hover {
   font-size: 0.8rem;
 }
 
+/* ABOUT */
+.about-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.about-clearance {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.about-bio {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.about-tag {
+  background: var(--border);
+  color: var(--accent2);
+  font-size: 0.72rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--accent2);
+}
+
 /* SKILLS */
 .skills-grid {
   background: var(--card-bg);
