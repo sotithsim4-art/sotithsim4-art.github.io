@@ -192,22 +192,21 @@
     const output = document.getElementById("terminal-output");
     let lineIndex = 0;
     let charIndex = 0;
-    let currentLine = "";
+    let completedHTML = "";
 
     function type() {
       if (lineIndex >= lines.length) return;
       const line = lines[lineIndex];
       if (charIndex < line.length) {
-        currentLine += line[charIndex];
-        output.innerHTML = output.innerHTML.replace(/<span[^>]*>[^<]*<\/span>$/, "") + currentLine;
         charIndex++;
+        output.innerHTML = completedHTML + line.substring(0, charIndex);
         setTimeout(type, 35);
       } else {
-        output.innerHTML += "<br/>";
-        currentLine = "";
+        completedHTML += line + "<br/>";
+        output.innerHTML = completedHTML;
         charIndex = 0;
         lineIndex++;
-        setTimeout(type, 400);
+        setTimeout(type, 500);
       }
     }
 
