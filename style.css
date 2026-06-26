@@ -22,52 +22,12 @@
   font-family: 'Courier New', monospace;
 }
 
-.loader-glitch {
+.loader-title {
   font-size: 7rem;
   font-weight: 900;
-  color: #fff;
-  letter-spacing: 12px;
-  position: relative;
-  animation: glitch 1.5s infinite;
-}
-
-.loader-glitch::before,
-.loader-glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-}
-
-.loader-glitch::before {
   color: #f59e0b;
-  animation: glitch-top 1.5s infinite;
-  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
-}
-
-.loader-glitch::after {
-  color: #22d3ee;
-  animation: glitch-bottom 1.5s infinite;
-  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
-}
-
-@keyframes glitch {
-  0%, 90%, 100% { transform: translate(0); }
-  92% { transform: translate(-3px, 1px); }
-  94% { transform: translate(3px, -1px); }
-  96% { transform: translate(-2px, 2px); }
-}
-
-@keyframes glitch-top {
-  0%, 90%, 100% { transform: translate(0); }
-  92% { transform: translate(4px, 0); }
-  94% { transform: translate(-4px, 0); }
-}
-
-@keyframes glitch-bottom {
-  0%, 90%, 100% { transform: translate(0); }
-  92% { transform: translate(-4px, 0); }
-  94% { transform: translate(4px, 0); }
+  letter-spacing: 16px;
+  margin-bottom: 0;
 }
 
 .loader-subtitle {
