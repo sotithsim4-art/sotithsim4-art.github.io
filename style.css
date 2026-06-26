@@ -184,6 +184,11 @@ body {
   min-height: 100vh;
 }
 
+body.loading {
+  overflow: hidden;
+  height: 100vh;
+}
+
 /* SIDEBAR */
 .sidebar {
   width: 220px;

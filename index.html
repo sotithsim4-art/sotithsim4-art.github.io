@@ -6,7 +6,7 @@
   <title>SOC Portfolio | sotithsim4-art</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="loading">
 
   <!-- STAGE 1: TERMINAL -->
   <div id="stage1" class="stage">
@@ -303,7 +303,10 @@
     function goDashboard() {
       const s3 = document.getElementById("stage3");
       s3.classList.add("fade-out");
-      setTimeout(() => s3.remove(), 800);
+      setTimeout(() => {
+        s3.remove();
+        document.body.classList.remove("loading");
+      }, 800);
     }
   </script>
 
