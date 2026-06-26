@@ -55,6 +55,11 @@
       </div>
     </section>
 
+    <section class="threat-feed-section">
+      <h2 class="section-title">● LIVE THREAT FEED</h2>
+      <div id="threat-feed" class="threat-feed"></div>
+    </section>
+
     <section class="terminal-section">
       <div class="terminal-header">
         <span class="terminal-title">ANALYST TERMINAL</span>
@@ -174,6 +179,39 @@
     </section>
 
   </main>
+
+  <script>
+    const threats = [
+      { level: "critical", title: "SSH Brute Force Detected", detail: "SRC: 192.168.56.101 → DEST: 22 | 47 failed attempts | Account locked", time: "00:03" },
+      { level: "high", title: "Port Scan Detected", detail: "Nmap SYN scan across ports 21, 22, 80, 443 | Source: 10.0.0.44", time: "00:11" },
+      { level: "high", title: "Phishing Email Flagged", detail: "Suspicious domain: paypa1.com | Urgent language detected | Quarantined", time: "00:18" },
+      { level: "medium", title: "Weak Password Policy Violation", detail: "User account using password score 1/5 | Force reset triggered", time: "00:25" },
+      { level: "medium", title: "File Integrity Alert", detail: "config.sys modified outside maintenance window | Hash mismatch", time: "00:34" },
+    ];
+
+    const feed = document.getElementById("threat-feed");
+    let threatIndex = 0;
+
+    function addThreat() {
+      if (threatIndex >= threats.length) return;
+      const t = threats[threatIndex];
+      const item = document.createElement("div");
+      item.className = "threat-item";
+      item.innerHTML = `
+        <span class="threat-badge ${t.level}">${t.level.toUpperCase()}</span>
+        <div class="threat-info">
+          <div class="threat-title">${t.title}</div>
+          <div class="threat-detail">${t.detail}</div>
+        </div>
+        <span class="threat-time">${t.time}</span>
+      `;
+      feed.appendChild(item);
+      threatIndex++;
+      if (threatIndex < threats.length) setTimeout(addThreat, 1500);
+    }
+
+    setTimeout(addThreat, 500);
+  </script>
 
   <script>
     const lines = [
