@@ -8,16 +8,43 @@
 </head>
 <body>
 
-  <!-- LOADING SCREEN -->
-  <div id="loader">
-    <div class="loader-inner">
-      <div class="loader-title">SS</div>
-      <div class="loader-subtitle">SOTITH SIM</div>
-      <div class="loader-status" id="loader-status">INITIALIZING SECURE CONNECTION...</div>
-      <div class="loader-bar-wrap">
-        <div class="loader-bar" id="loader-bar"></div>
+  <!-- STAGE 1: TERMINAL -->
+  <div id="stage1" class="stage">
+    <div class="stage1-window">
+      <div class="stage1-titlebar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="stage1-title">SOTITH@SOC-NODE: ~/SECURE</span>
+        <span class="stage1-session">SUDO SESSION</span>
       </div>
-      <div class="loader-percent" id="loader-percent">0%</div>
+      <div class="stage1-body" id="stage1-output"></div>
+    </div>
+    <div class="stage1-caption" id="stage1-caption"></div>
+  </div>
+
+  <!-- STAGE 2: PROGRESS BAR -->
+  <div id="stage2" class="stage hidden">
+    <div class="stage2-inner">
+      <div class="stage2-title">INITIATING SOC SYSTEM</div>
+      <div class="stage2-bar-wrap">
+        <div class="stage2-bar" id="stage2-bar"></div>
+      </div>
+      <div class="stage2-meta">
+        <span id="stage2-state">STATE: <strong>LOADING THREAT DATABASE</strong></span>
+        <span id="stage2-percent">PROGRESS: <strong>0%</strong></span>
+      </div>
+      <div class="stage2-sub" id="stage2-sub">scanning network topology · establishing encrypted tunnel</div>
+    </div>
+  </div>
+
+  <!-- STAGE 3: HERO REVEAL -->
+  <div id="stage3" class="stage hidden">
+    <img src="hero.jpg" class="stage3-img" alt="SOC" />
+    <div class="stage3-overlay">
+      <div class="stage3-name">SOTITH SIM</div>
+      <div class="stage3-tagline">SOC ANALYST — ONLINE</div>
+      <div class="stage3-sub">Suit locked. Transitioning to portfolio interface now.</div>
     </div>
   </div>
 
@@ -189,40 +216,95 @@
   </main>
 
   <script>
-    const statuses = [
-      "INITIALIZING SECURE CONNECTION...",
-      "VERIFYING CREDENTIALS...",
-      "LOADING THREAT DATABASE...",
-      "ESTABLISHING ENCRYPTED TUNNEL...",
+    // STAGE 1 — Terminal typing
+    const s1lines = [
+      { text: "sotith@soc:~$ cd ~/secure", color: "#f59e0b" },
+      { text: "sotith@soc:~$ ls", color: "#f59e0b" },
+      { text: "phishing_detector.py   login_monitor.py   port_scanner.py   file_integrity.py", color: "#22d3ee" },
+      { text: "sotith@soc:~$ sudo ./launch_soc.sh --analyst sotith-sim", color: "#f59e0b" },
+    ];
+    const s1caption = "Launching as sudo user, then handing off to SOC dashboard.";
+
+    const s1output = document.getElementById("stage1-output");
+    const s1cap = document.getElementById("stage1-caption");
+    let s1line = 0, s1char = 0, s1html = "";
+
+    function typeStage1() {
+      if (s1line >= s1lines.length) {
+        s1cap.textContent = s1caption;
+        setTimeout(goStage2, 1200);
+        return;
+      }
+      const line = s1lines[s1line];
+      if (s1char < line.text.length) {
+        s1char++;
+        s1output.innerHTML = s1html + `<span style="color:${line.color}">${line.text.substring(0, s1char)}</span>`;
+        setTimeout(typeStage1, 30);
+      } else {
+        s1html += `<span style="color:${line.color}">${line.text}</span><br/>`;
+        s1output.innerHTML = s1html;
+        s1char = 0; s1line++;
+        setTimeout(typeStage1, 400);
+      }
+    }
+    setTimeout(typeStage1, 600);
+
+    function goStage2() {
+      const s1 = document.getElementById("stage1");
+      s1.classList.add("fade-out");
+      setTimeout(() => {
+        s1.classList.add("hidden");
+        const s2 = document.getElementById("stage2");
+        s2.classList.remove("hidden");
+        runStage2();
+      }, 800);
+    }
+
+    // STAGE 2 — Progress bar
+    const s2states = [
+      "LOADING THREAT DATABASE",
+      "VERIFYING CREDENTIALS",
+      "ESTABLISHING ENCRYPTED TUNNEL",
+      "DEPLOYING ANALYST INTERFACE",
       "ACCESS GRANTED",
     ];
+    let s2progress = 0;
 
-    const bar = document.getElementById("loader-bar");
-    const percent = document.getElementById("loader-percent");
-    const status = document.getElementById("loader-status");
-    const loader = document.getElementById("loader");
+    function runStage2() {
+      const bar = document.getElementById("stage2-bar");
+      const pct = document.getElementById("stage2-percent");
+      const state = document.getElementById("stage2-state");
 
-    let progress = 0;
-    let statusIndex = 0;
+      const iv = setInterval(() => {
+        s2progress += 1;
+        bar.style.width = s2progress + "%";
+        pct.innerHTML = `PROGRESS: <strong>${s2progress}%</strong>`;
+        const si = Math.min(Math.floor((s2progress / 100) * s2states.length), s2states.length - 1);
+        state.innerHTML = `STATE: <strong>${s2states[si]}</strong>`;
+        if (s2progress >= 100) {
+          clearInterval(iv);
+          setTimeout(goStage3, 800);
+        }
+      }, 30);
+    }
 
-    const interval = setInterval(() => {
-      progress += 2;
-      bar.style.width = progress + "%";
-      percent.textContent = progress + "%";
+    function goStage3() {
+      const s2 = document.getElementById("stage2");
+      s2.classList.add("fade-out");
+      setTimeout(() => {
+        s2.classList.add("hidden");
+        const s3 = document.getElementById("stage3");
+        s3.classList.remove("hidden");
+        setTimeout(goDashboard, 2500);
+      }, 800);
+    }
 
-      const step = Math.floor((progress / 100) * statuses.length);
-      if (step < statuses.length && statuses[step] !== status.textContent) {
-        status.textContent = statuses[step];
-      }
-
-      if (progress >= 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          loader.classList.add("hide");
-          setTimeout(() => loader.remove(), 800);
-        }, 600);
-      }
-    }, 40);
+    // STAGE 3 — Hero reveal then dashboard
+    function goDashboard() {
+      const s3 = document.getElementById("stage3");
+      s3.classList.add("fade-out");
+      setTimeout(() => s3.remove(), 800);
+    }
   </script>
 
   <script>
