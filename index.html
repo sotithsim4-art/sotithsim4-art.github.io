@@ -8,6 +8,19 @@
 </head>
 <body>
 
+  <!-- LOADING SCREEN -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-glitch" id="glitch-text">SS</div>
+      <div class="loader-subtitle">SOTITH SIM</div>
+      <div class="loader-status" id="loader-status">INITIALIZING SECURE CONNECTION...</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loader-bar"></div>
+      </div>
+      <div class="loader-percent" id="loader-percent">0%</div>
+    </div>
+  </div>
+
   <aside class="sidebar">
     <div class="logo">CYBERSEC</div>
     <div class="profile-card">
@@ -174,6 +187,46 @@
     </section>
 
   </main>
+
+  <script>
+    const glitch = document.getElementById("glitch-text");
+    glitch.setAttribute("data-text", "SS");
+
+    const statuses = [
+      "INITIALIZING SECURE CONNECTION...",
+      "VERIFYING CREDENTIALS...",
+      "LOADING THREAT DATABASE...",
+      "ESTABLISHING ENCRYPTED TUNNEL...",
+      "ACCESS GRANTED",
+    ];
+
+    const bar = document.getElementById("loader-bar");
+    const percent = document.getElementById("loader-percent");
+    const status = document.getElementById("loader-status");
+    const loader = document.getElementById("loader");
+
+    let progress = 0;
+    let statusIndex = 0;
+
+    const interval = setInterval(() => {
+      progress += 2;
+      bar.style.width = progress + "%";
+      percent.textContent = progress + "%";
+
+      const step = Math.floor((progress / 100) * statuses.length);
+      if (step < statuses.length && statuses[step] !== status.textContent) {
+        status.textContent = statuses[step];
+      }
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          loader.classList.add("hide");
+          setTimeout(() => loader.remove(), 800);
+        }, 600);
+      }
+    }, 40);
+  </script>
 
   <script>
     const threats = [
