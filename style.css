@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --bg: #0a0e1a;
   --sidebar-bg: #0d1117;
