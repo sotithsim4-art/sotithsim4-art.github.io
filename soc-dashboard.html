@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SOC Portfolio | Sotith Sim</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <aside class="sidebar">
+    <a href="index.html" class="hub-link">◂ HUB</a>
+    <div class="logo">CYBERSEC</div>
+    <div class="profile-card">
+      <div class="profile-label">SOC ANALYST PROFILE</div>
+      <div class="profile-name">Sotith Sim</div>
+      <div class="profile-tags">Army Veteran • Cybersecurity • IT</div>
+    </div>
+    <nav>
+      <a href="#about">About Me</a>
+      <a href="#projects">Projects</a>
+      <a href="#tryhackme">TryHackMe</a>
+      <a href="#skills">Security Stack</a>
+      <a href="#contact">Contact</a>
+      <a href="pentest-dashboard.html">Pentest Dashboard →</a>
+    </nav>
+    <div class="system-status">
+      SYSTEM STATUS: ONLINE<br/>
+      POWER LEVEL: SECURE
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <header class="hero">
+      <h1>SOC DASHBOARD<br/><span>PORTFOLIO</span></h1>
+      <p class="tagline">Cybersecurity portfolio built like a live security operations command center.</p>
+      <p class="bio">I detect threats, analyze vulnerabilities, and build tools that make systems more secure.</p>
+      <a href="#projects" class="btn">View Projects</a>
+    </header>
+
+    <section class="stats">
+      <div class="stat-card">
+        <div class="stat-label">GitHub Projects</div>
+        <div class="stat-value">16</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Years Leadership</div>
+        <div class="stat-value">20</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Tools Built</div>
+        <div class="stat-value">8+</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Status</div>
+        <div class="stat-value green">ACTIVE</div>
+      </div>
+    </section>
+
+    <section class="terminal-section">
+      <div class="terminal-header">
+        <span class="terminal-title">ANALYST TERMINAL</span>
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+      </div>
+      <div class="terminal-body">
+        <div id="terminal-output"></div>
+        <span class="terminal-cursor">█</span>
+      </div>
+    </section>
+
+    <section class="hero-image-section">
+      <div class="hero-image-wrapper">
+        <img src="hero.jpg" alt="Cybersecurity SOC Analyst" class="hero-img" />
+        <div class="hero-image-overlay">
+          <span class="live-badge">● LIVE VISUAL INTEL</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <h2 class="section-title">PROJECTS</h2>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-tag critical">TOOL</div>
+          <h3>Password Strength Checker</h3>
+          <p>Analyzes passwords for strength based on length, complexity, and character variety.</p>
+          <a href="https://github.com/sotithsim4-art/password-checker" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag high">TOOL</div>
+          <h3>Phishing Email Detector</h3>
+          <p>Scans emails for phishing red flags including urgent language and suspicious domains.</p>
+          <a href="https://github.com/sotithsim4-art/phishing-detector" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag high">TOOL</div>
+          <h3>Login Attempt Monitor</h3>
+          <p>Detects brute force attacks by tracking failed logins and locking accounts.</p>
+          <a href="https://github.com/sotithsim4-art/login-monitor" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag medium">TOOL</div>
+          <h3>File Integrity Checker</h3>
+          <p>Detects file tampering using SHA-256 cryptographic hashing.</p>
+          <a href="https://github.com/sotithsim4-art/file-integrity-checker" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag medium">TOOL</div>
+          <h3>Port Scanner</h3>
+          <p>Scans a host for open ports and identifies running services.</p>
+          <a href="https://github.com/sotithsim4-art/port-scanner" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag low">TOOL</div>
+          <h3>Caesar Cipher</h3>
+          <p>Encrypts and decrypts messages using classic Caesar Cipher technique.</p>
+          <a href="https://github.com/sotithsim4-art/caesar-cipher" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag medium">AUTOMATION</div>
+          <h3>System Health Checker</h3>
+          <p>Scans CPU, memory, disk usage, and running processes. Alerts when thresholds are exceeded.</p>
+          <a href="https://github.com/sotithsim4-art/system-health-checker" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag medium">AUTOMATION</div>
+          <h3>Automated Log Cleaner</h3>
+          <p>Scans folders and deletes files older than a specified number of days to free up storage.</p>
+          <a href="https://github.com/sotithsim4-art/log-cleaner" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag medium">AUTOMATION</div>
+          <h3>Network Speed Logger</h3>
+          <p>Tests internet download speed and logs results with timestamps for performance monitoring.</p>
+          <a href="https://github.com/sotithsim4-art/network-speed-logger" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag high">TOOL</div>
+          <h3>IP Address Lookup</h3>
+          <p>Looks up location, ISP, and threat indicators for any IP address. Used in SOC investigations.</p>
+          <a href="https://github.com/sotithsim4-art/ip-lookup" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag critical">TOOL</div>
+          <h3>Vulnerability Scanner</h3>
+          <p>Scans a target host for open ports, missing HTTP security headers, and SSL certificate issues.</p>
+          <a href="https://github.com/sotithsim4-art/vulnerability-scanner" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag critical">GRC</div>
+          <h3>NIST CSF Checklist</h3>
+          <p>Walks through all five NIST Cybersecurity Framework functions and generates a scored compliance report.</p>
+          <a href="https://github.com/sotithsim4-art/nist-csf-checklist" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag critical">GRC</div>
+          <h3>HIPAA Compliance Checker</h3>
+          <p>Assesses an organization against HIPAA Security Rule requirements and generates a compliance gap report.</p>
+          <a href="https://github.com/sotithsim4-art/hipaa-compliance-checker" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag critical">GRC</div>
+          <h3>Risk Assessment Tool</h3>
+          <p>Evaluates cybersecurity risk across five categories using weighted scoring and generates a prioritized remediation report.</p>
+          <a href="https://github.com/sotithsim4-art/risk-assessment-tool" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-tag critical">IR</div>
+          <h3>Incident Response Playbook</h3>
+          <p>Guides a SOC analyst through phishing, ransomware, and unauthorized access incidents using the NIST SP 800-61 framework.</p>
+          <a href="https://github.com/sotithsim4-art/incident-response-playbook" target="_blank" class="project-link">View on GitHub →</a>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="certifications" class="section">
+      <h2 class="section-title">CERTIFICATIONS</h2>
+      <div class="certs-grid">
+
+        <div class="cert-card">
+          <div class="cert-issuer">CompTIA</div>
+          <div class="cert-name">Security+</div>
+          <div class="cert-status">✓ Certified</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-issuer">CompTIA</div>
+          <div class="cert-name">Linux+</div>
+          <div class="cert-status">✓ Certified</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-issuer">Splunk</div>
+          <div class="cert-name">Certified User</div>
+          <div class="cert-status">✓ Certified</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-issuer">ISC2</div>
+          <div class="cert-name">Certified in Cybersecurity (CC)</div>
+          <div class="cert-status">✓ Certified</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="tryhackme" class="section">
+      <h2 class="section-title">TRYHACKME PROGRESS</h2>
+      <div class="thm-profile">
+        <div class="thm-header">
+          <div class="thm-user">
+            <div class="thm-avatar">⚔</div>
+            <div>
+              <div class="thm-username">sotithsim4</div>
+              <div class="thm-sub">Active Learner • Cybersecurity Path</div>
+            </div>
+          </div>
+          <a href="https://tryhackme.com/p/sotithsim4" target="_blank" class="btn">View Profile</a>
+        </div>
+        <div class="thm-stats">
+          <div class="thm-stat">
+            <div class="thm-stat-val">32</div>
+            <div class="thm-stat-label">Points Earned</div>
+          </div>
+          <div class="thm-stat">
+            <div class="thm-stat-val">1</div>
+            <div class="thm-stat-label">Day Streak</div>
+          </div>
+          <div class="thm-stat">
+            <div class="thm-stat-val">4</div>
+            <div class="thm-stat-label">Tasks Done</div>
+          </div>
+        </div>
+        <div class="thm-rooms">
+          <div class="thm-room-title">COMPLETED ROOMS</div>
+          <div class="thm-room done">✓ Offensive Security Intro</div>
+        </div>
+        <div class="thm-rooms">
+          <div class="thm-room-title">IN PROGRESS</div>
+          <div class="thm-room active">▶ Pre-Security Path</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <h2 class="section-title">SECURITY STACK</h2>
+      <div class="skills-grid">
+        <div class="skill-row"><span>Languages</span><span class="skill-val">Python</span></div>
+        <div class="skill-row"><span>Concepts</span><span class="skill-val">Encryption • Brute Force Detection • Phishing Analysis • File Integrity</span></div>
+        <div class="skill-row"><span>Tools</span><span class="skill-val">Git • GitHub • VS Code</span></div>
+        <div class="skill-row"><span>Background</span><span class="skill-val">20 Years U.S. Army</span></div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2 class="section-title">ABOUT ME</h2>
+      <div class="about-card">
+        <div class="about-clearance">🔒 Active Secret Security Clearance</div>
+        <p class="about-bio">Mission-driven Cybersecurity Professional and US Army Veteran with 20 years of experience in technical leadership and infrastructure protection. Specialized in vulnerability analysis, threat detection, and network security with a proven track record of safeguarding critical systems.</p>
+        <p class="about-bio">During my Army career I managed cybersecurity and compliance protocols for government-issued IT systems, maintained 200+ mission-critical communication systems, and led teams across Germany, South Korea, Boston, and the Asia Pacific region — enforcing DoD, HIPAA, and NIST standards while protecting classified and unclassified networks.</p>
+        <p class="about-bio">I build hands-on cybersecurity tools in Python, hold four industry certifications, and am actively seeking roles in cybersecurity where I can protect people, systems, and data.</p>
+        <div class="about-tags">
+          <span class="about-tag">US Army Veteran</span>
+          <span class="about-tag">20 Years Leadership</span>
+          <span class="about-tag">Secret Clearance</span>
+          <span class="about-tag">DoD / HIPAA / NIST</span>
+          <span class="about-tag">Python</span>
+          <span class="about-tag">Linux</span>
+          <span class="about-tag">Splunk</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2 class="section-title">CONTACT</h2>
+      <p style="color: var(--text-dim);">Open to cybersecurity roles. Reach out on GitHub.</p>
+      <a href="https://github.com/sotithsim4-art" target="_blank" class="btn">GitHub Profile</a>
+      <a href="https://tryhackme.com/p/sotithsim4" target="_blank" class="btn">TryHackMe Profile</a>
+    </section>
+
+  </main>
+
+  <script>
+    const lines = [
+      "sotith@soc:~$ whoami",
+      "sotith-sim -- SOC Analyst | Army Veteran | Cybersecurity",
+      "sotith@soc:~$ ls certifications/",
+      "CompTIA_Security+  CompTIA_Linux+  Splunk_User  ISC2_CC",
+      "sotith@soc:~$ python3 phishing_detector.py",
+      "Scanning email headers...",
+      "ALERT: Suspicious domain detected -- paypa1.com",
+      "Verdict: LIKELY PHISHING",
+      "sotith@soc:~$ status",
+      "System secure. Monitoring active. Ready to defend.",
+    ];
+
+    const output = document.getElementById("terminal-output");
+    let lineIndex = 0;
+    let charIndex = 0;
+    let completedHTML = "";
+
+    function type() {
+      if (lineIndex >= lines.length) return;
+      const line = lines[lineIndex];
+      if (charIndex < line.length) {
+        charIndex++;
+        output.innerHTML = completedHTML + line.substring(0, charIndex);
+        setTimeout(type, 35);
+      } else {
+        completedHTML += line + "<br/>";
+        output.innerHTML = completedHTML;
+        charIndex = 0;
+        lineIndex++;
+        setTimeout(type, 500);
+      }
+    }
+
+    setTimeout(type, 800);
+  </script>
+
+</body>
+</html>
