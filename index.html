@@ -29,33 +29,7 @@
       </div>
     </div>
 
-    <div class="hub-grid">
-
-      <a href="soc-dashboard.html" class="hub-card">
-        <div class="hub-card-icon">🛡</div>
-        <div class="project-tag high">DEFENSIVE</div>
-        <h2>SOC Dashboard</h2>
-        <p>Blue-team portfolio: threat detection, incident response, GRC, and monitoring tools built like a live security operations center.</p>
-        <div class="hub-card-stats">
-          <span>16 Projects</span>
-          <span>4 Certifications</span>
-        </div>
-        <span class="hub-card-cta">ENTER DASHBOARD →</span>
-      </a>
-
-      <a href="pentest-dashboard.html" class="hub-card">
-        <div class="hub-card-icon">💀</div>
-        <div class="project-tag critical">OFFENSIVE</div>
-        <h2>Pentest Dashboard</h2>
-        <p>Red-team toolkit: reconnaissance, enumeration, and vulnerability-identification tools for authorized penetration testing.</p>
-        <div class="hub-card-stats">
-          <span>5 Tools</span>
-          <span>Authorized Use Only</span>
-        </div>
-        <span class="hub-card-cta">ENTER DASHBOARD →</span>
-      </a>
-
-    </div>
+    <div class="hub-grid" id="hub-grid"></div>
 
     <div class="hub-footer">
       <a href="https://github.com/sotithsim4-art" target="_blank">GitHub</a>
@@ -64,16 +38,11 @@
 
   </main>
 
+  <script src="dashboards.js"></script>
   <script>
-    const lines = [
-      "sotith@hub:~$ init --system",
-      "Loading dashboards...",
-      "  [ok] soc-dashboard.html",
-      "  [ok] pentest-dashboard.html",
-      "sotith@hub:~$ status",
-      "2 dashboards online. Awaiting selection.",
-    ];
+    renderHub();
 
+    const lines = bootSequenceLines();
     const output = document.getElementById("terminal-output");
     let lineIndex = 0;
     let charIndex = 0;
