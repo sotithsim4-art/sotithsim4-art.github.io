@@ -254,6 +254,41 @@ nav a:hover {
   color: #22c55e;
 }
 
+.hub-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.hub-prompt[hidden] {
+  display: none;
+}
+
+.hub-prompt label {
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.hub-prompt input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--green);
+  font: inherit;
+  caret-color: var(--green);
+}
+
+.terminal-line-cmd {
+  color: var(--accent);
+}
+
+.terminal-line-out {
+  color: var(--green);
+}
+
 @keyframes blink {
   50% { opacity: 0; }
 }
@@ -614,6 +649,7 @@ nav a:hover {
 .hub-main {
   width: 100%;
   max-width: 880px;
+  min-width: 0;
 }
 
 .hub-header {
@@ -638,6 +674,7 @@ nav a:hover {
 .hub-tagline {
   color: var(--text-dim);
   font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .hub-terminal {
@@ -721,5 +758,14 @@ nav a:hover {
 @media (max-width: 700px) {
   .hub-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hub-title {
+    font-size: 1.7rem;
+    letter-spacing: 1px;
+  }
+
+  .hub-tagline {
+    font-size: 0.78rem;
   }
 }

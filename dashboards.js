@@ -39,6 +39,56 @@ function renderHub() {
 function bootSequenceLines() {
   const lines = ["sotith@hub:~$ init --system", "Loading dashboards..."];
   DASHBOARDS.forEach((d) => lines.push(`&nbsp;&nbsp;[ok] ${d.href}`));
-  lines.push("sotith@hub:~$ status", `${DASHBOARDS.length} dashboards online. Awaiting selection.`);
+  lines.push("sotith@hub:~$ status", `${DASHBOARDS.length} dashboards online. Type help.`);
   return lines;
+}
+
+function runHubCommand(raw) {
+  const line = String(raw ?? "").trim();
+  const cmd = line.toLowerCase();
+  if (cmd === "") return { lines: [] };
+  if (cmd === "help") {
+    return {
+      lines: [
+        "help        show this list",
+        "whoami      operator profile",
+        "ls          list dashboards",
+        "1           enter the SOC dashboard",
+        "2           enter the Pentest dashboard",
+        "clear       clear the screen",
+        "up / down   recall earlier commands",
+      ],
+    };
+  }
+  if (cmd === "whoami") {
+    return {
+      lines: [
+        "Sotith Sim",
+        "SOC analyst, Army veteran, cybersecurity.",
+        "github.com/sotithsim4-art",
+        "tryhackme.com/p/sotithsim4",
+      ],
+    };
+  }
+  if (cmd === "ls" || cmd === "dashboards") {
+    return {
+      lines: DASHBOARDS.map((dashboard, index) => {
+        const number = String(index + 1).padEnd(3, " ");
+        const href = dashboard.href.padEnd(24, " ");
+        return `${number}${href}${dashboard.tag.padEnd(12, " ")}${dashboard.title}`;
+      }),
+    };
+  }
+  if (cmd === "1" || cmd === "soc") {
+    return { lines: ["Opening SOC dashboard..."], navigate: DASHBOARDS[0].href };
+  }
+  if (cmd === "2" || cmd === "pentest") {
+    return { lines: ["Opening Pentest dashboard..."], navigate: DASHBOARDS[1].href };
+  }
+  if (cmd === "clear") return { lines: [], clear: true };
+  return { lines: [`command not found: ${line}`, "Type help."] };
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { runHubCommand, DASHBOARDS, bootSequenceLines };
 }

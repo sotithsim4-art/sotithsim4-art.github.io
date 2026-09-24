@@ -25,7 +25,11 @@
       </div>
       <div class="terminal-body">
         <div id="terminal-output"></div>
-        <span class="terminal-cursor">█</span>
+        <form id="hub-prompt" class="hub-prompt" hidden>
+          <label for="hub-command">sotith@hub:~$</label>
+          <input id="hub-command" name="command" autocomplete="off" spellcheck="false" aria-label="Hub command" />
+        </form>
+        <span class="terminal-cursor" id="boot-cursor">█</span>
       </div>
     </div>
 
@@ -49,7 +53,10 @@
     let completedHTML = "";
 
     function type() {
-      if (lineIndex >= lines.length) return;
+      if (lineIndex >= lines.length) {
+        startShell();
+        return;
+      }
       const line = lines[lineIndex];
       if (charIndex < line.length) {
         charIndex++;
@@ -62,6 +69,66 @@
         lineIndex++;
         setTimeout(type, 400);
       }
+    }
+
+    function appendLine(text, className) {
+      const row = document.createElement("div");
+      row.className = className;
+      row.textContent = text;
+      output.appendChild(row);
+    }
+
+    function startShell() {
+      const form = document.getElementById("hub-prompt");
+      const input = document.getElementById("hub-command");
+      const title = document.querySelector(".hub-terminal .terminal-title");
+      const history = [];
+      let historyIndex = 0;
+
+      document.getElementById("boot-cursor").hidden = true;
+      form.hidden = false;
+      title.textContent = "HUB SHELL";
+      input.focus();
+
+      input.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;
+        event.preventDefault();
+        if (event.key === "ArrowUp" && historyIndex > 0) {
+          historyIndex -= 1;
+          input.value = history[historyIndex];
+        }
+        if (event.key === "ArrowDown") {
+          if (historyIndex < history.length - 1) {
+            historyIndex += 1;
+            input.value = history[historyIndex];
+          } else {
+            historyIndex = history.length;
+            input.value = "";
+          }
+        }
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const raw = input.value;
+        input.value = "";
+        const result = runHubCommand(raw);
+        if (result.clear) {
+          output.innerHTML = "";
+          completedHTML = "";
+          return;
+        }
+        if (raw.trim() === "") return;
+        history.push(raw);
+        historyIndex = history.length;
+        appendLine("sotith@hub:~$ " + raw.trim(), "terminal-line-cmd");
+        result.lines.forEach((line) => appendLine(line, "terminal-line-out"));
+        if (result.navigate) {
+          window.setTimeout(() => {
+            window.location.href = result.navigate;
+          }, 280);
+        }
+      });
     }
 
     setTimeout(type, 600);
