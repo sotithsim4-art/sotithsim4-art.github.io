@@ -739,6 +739,10 @@ nav a:hover {
   font-weight: bold;
 }
 
+.iam-section {
+  margin-bottom: 32px;
+}
+
 .hub-footer {
   display: flex;
   justify-content: center;

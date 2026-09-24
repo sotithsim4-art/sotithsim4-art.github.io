@@ -35,6 +35,11 @@
 
     <div class="hub-grid" id="hub-grid"></div>
 
+    <section class="iam-section" id="iam">
+      <h2 class="section-title">IAM TOOLS</h2>
+      <div class="hub-grid" id="iam-grid"></div>
+    </section>
+
     <div class="hub-footer">
       <a href="https://github.com/sotithsim4-art" target="_blank">GitHub</a>
       <a href="https://tryhackme.com/p/sotithsim4" target="_blank">TryHackMe</a>
@@ -45,6 +50,7 @@
   <script src="dashboards.js"></script>
   <script>
     renderHub();
+    renderIam();
 
     const lines = bootSequenceLines();
     const output = document.getElementById("terminal-output");
@@ -127,6 +133,9 @@
           window.setTimeout(() => {
             window.location.href = result.navigate;
           }, 280);
+        }
+        if (result.anchor) {
+          document.getElementById(result.anchor).scrollIntoView({ behavior: "smooth" });
         }
       });
     }
