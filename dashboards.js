@@ -76,6 +76,69 @@ function renderIam() {
   `).join("");
 }
 
+// Associate: Regulatory Support section. Gate is client-side only (a convenience lock, not security):
+// the passcode is stored as a SHA-256 hash. Keep anything truly sensitive out of this page.
+const REG_SUPPORT_HASH = "f44fa27fe300f86b7385babc3d127788dd77d561364e9d1b27c913b7f1eff396";
+const REG_SUPPORT_TOOLS = [
+  {
+    folder: "control-mapping",
+    title: "Regulatory Control Mapping Hub",
+    description: "Map each control once across NIST CSF 2.0, GLBA Safeguards, Reg S-P, NYDFS Part 500, SOX ITGCs and DORA. Evidence, owners, review dates, gap reports.",
+  },
+  {
+    folder: "data-discovery",
+    title: "Data Discovery and Classification",
+    description: "Finds NPI and PII in file shares and databases, tags sensitivity, maps lineage and flags shadow copies.",
+  },
+  {
+    folder: "access-governance",
+    title: "Access Governance and Recertification",
+    description: "Manager attestations, orphaned and excessive access, MFA coverage and audit-ready review records.",
+  },
+];
+
+async function sha256Hex(text) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+function renderRegSupport() {
+  const grid = document.getElementById("reg-grid");
+  grid.innerHTML = REG_SUPPORT_TOOLS.map((tool) => `
+    <a class="hub-card" href="https://github.com/sotithsim4-art/brain-vault/tree/add-compliance-apps/compliance-apps/${tool.folder}" target="_blank" rel="noopener">
+      <div class="project-tag high">REG SUPPORT</div>
+      <h2>${tool.title}</h2>
+      <p>${tool.description}</p>
+      <span class="hub-card-cta">VIEW ON GITHUB →</span>
+    </a>
+  `).join("");
+}
+
+function unlockRegSupport() {
+  document.getElementById("reg-lock").hidden = true;
+  document.getElementById("reg-content").hidden = false;
+  renderRegSupport();
+}
+
+function initRegSupport() {
+  const form = document.getElementById("reg-form");
+  const input = document.getElementById("reg-code");
+  const msg = document.getElementById("reg-msg");
+  try { if (sessionStorage.getItem("reg-unlocked") === "1") return unlockRegSupport(); } catch (e) {}
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    let ok = false;
+    try { ok = (await sha256Hex(input.value.trim())) === REG_SUPPORT_HASH; } catch (e) {}
+    if (ok) {
+      try { sessionStorage.setItem("reg-unlocked", "1"); } catch (e) {}
+      unlockRegSupport();
+    } else {
+      msg.textContent = "Access denied.";
+      input.value = "";
+    }
+  });
+}
+
 function bootSequenceLines() {
   const lines = ["sotith@hub:~$ init --system", "Loading dashboards..."];
   DASHBOARDS.forEach((d) => lines.push(`&nbsp;&nbsp;[ok] ${d.href}`));
@@ -138,5 +201,5 @@ function runHubCommand(raw) {
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { runHubCommand, DASHBOARDS, IAM_TOOLS, bootSequenceLines };
+  module.exports = { runHubCommand, DASHBOARDS, IAM_TOOLS, REG_SUPPORT_TOOLS, bootSequenceLines };
 }

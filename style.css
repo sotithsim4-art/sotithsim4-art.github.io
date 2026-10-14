@@ -773,3 +773,7 @@ nav a:hover {
     font-size: 0.78rem;
   }
 }
+
+.reg-lock { display: flex; align-items: center; gap: 12px; margin: 12px 0; }
+.reg-msg { color: #ff5c5c; font-size: 0.85rem; }
+.reg-lock input { border-bottom: 1px solid var(--accent); padding: 4px 2px; max-width: 280px; }

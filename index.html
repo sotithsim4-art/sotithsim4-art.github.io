@@ -40,6 +40,18 @@
       <div class="hub-grid" id="iam-grid"></div>
     </section>
 
+    <section class="iam-section" id="reg-support">
+      <h2 class="section-title">ASSOCIATE: REGULATORY SUPPORT</h2>
+      <div id="reg-lock"><form id="reg-form" class="hub-prompt reg-lock">
+        <label for="reg-code">ACCESS CODE</label>
+        <input id="reg-code" type="password" autocomplete="off" spellcheck="false" aria-label="Access code" />
+        <span id="reg-msg" class="reg-msg" role="alert"></span>
+      </form></div>
+      <div id="reg-content" hidden>
+        <div class="hub-grid" id="reg-grid"></div>
+      </div>
+    </section>
+
     <div class="hub-footer">
       <a href="https://github.com/sotithsim4-art" target="_blank">GitHub</a>
       <a href="https://tryhackme.com/p/sotithsim4" target="_blank">TryHackMe</a>
@@ -51,6 +63,7 @@
   <script>
     renderHub();
     renderIam();
+    initRegSupport();
 
     const lines = bootSequenceLines();
     const output = document.getElementById("terminal-output");
