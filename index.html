@@ -5,8 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sotith Sim | Cybersecurity Hub</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="zen.css" />
+  <link rel="stylesheet" href="cyberpunk.css" />
+  <link rel="stylesheet" href="matrix-intro.css" />
 </head>
-<body class="hub-body">
+<body class="hub-body zen">
+  <section id="matrix-intro" aria-label="Portfolio startup">
+    <canvas id="matrix-rain" aria-hidden="true"></canvas>
+    <div class="matrix-shade" aria-hidden="true"></div>
+    <div class="matrix-panel">
+      <p class="matrix-eyebrow">SOTITH SIM / CYBERSECURITY PORTFOLIO</p>
+      <h2>Wake up, operator.</h2>
+      <p class="matrix-subtitle">Every signal tells a story.<br>The mission starts with knowing where to look.</p>
+      <div id="matrix-log" class="matrix-log" aria-hidden="true"></div>
+      <div class="matrix-track" aria-hidden="true"><span id="matrix-progress"></span></div>
+      <div class="matrix-bottom"><span id="matrix-status" role="status">SYSTEM BOOT / 0%</span><button id="matrix-skip" class="matrix-skip" type="button">SKIP INTRO &rarr;</button></div>
+    </div>
+  </section>
+  <noscript><style>#matrix-intro{display:none}</style></noscript>
 
   <main class="hub-main">
 
@@ -24,10 +40,10 @@
         <span class="terminal-dot green"></span>
       </div>
       <div class="terminal-body">
-        <div id="terminal-output"></div>
+        <div id="terminal-output" role="log" aria-label="Hub terminal output" aria-live="off"></div>
         <form id="hub-prompt" class="hub-prompt" hidden>
           <label for="hub-command">sotith@hub:~$</label>
-          <input id="hub-command" name="command" autocomplete="off" spellcheck="false" aria-label="Hub command" />
+          <input id="hub-command" name="command" autocomplete="off" spellcheck="false" aria-label="Hub command" placeholder="Try soc, pentest, iam, or help" autocapitalize="off" />
         </form>
         <span class="terminal-cursor" id="boot-cursor">█</span>
       </div>
@@ -59,6 +75,7 @@
 
   </main>
 
+  <script src="matrix-intro.js"></script>
   <script src="dashboards.js"></script>
   <script>
     renderHub();
@@ -80,7 +97,7 @@
       if (charIndex < line.length) {
         charIndex++;
         output.innerHTML = completedHTML + line.substring(0, charIndex);
-        setTimeout(type, 30);
+        setTimeout(type, 12);
       } else {
         completedHTML += line + "<br/>";
         output.innerHTML = completedHTML;
@@ -153,7 +170,7 @@
       });
     }
 
-    setTimeout(type, 600);
+    window.addEventListener("matrix:ready", () => setTimeout(type, 300), { once: true });
   </script>
 
 </body>

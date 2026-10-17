@@ -140,11 +140,17 @@ function initRegSupport() {
 }
 
 function bootSequenceLines() {
-  const lines = ["sotith@hub:~$ init --system", "Loading dashboards..."];
-  DASHBOARDS.forEach((d) => lines.push(`&nbsp;&nbsp;[ok] ${d.href}`));
-  lines.push(`&nbsp;&nbsp;[ok] ${IAM_TOOLS.length} IAM tools`);
-  lines.push("sotith@hub:~$ status", `${DASHBOARDS.length} dashboards online. Type help.`);
-  return lines;
+  return [
+    "sotith@hub:~$ init --system",
+    "[ OK ] Portfolio environment ready",
+    ...DASHBOARDS.map((d) => `[ OK ] ${d.title} / ${d.tag.toLowerCase()}`),
+    `[ OK ] ${IAM_TOOLS.length} identity &amp; access tools indexed`,
+    "",
+    "MISSION: Detect threats. Investigate signals. Protect systems.",
+    "",
+    "Choose your path: soc / pentest / iam",
+    "Type help for commands. Use Up / Down for history.",
+  ];
 }
 
 function runHubCommand(raw) {
@@ -155,15 +161,24 @@ function runHubCommand(raw) {
     return {
       lines: [
         "help        show this list",
+        "status      portfolio availability",
         "whoami      operator profile",
         "ls          list dashboards",
-        "1           enter the SOC dashboard",
-        "2           enter the Pentest dashboard",
+        "soc / 1     enter the SOC dashboard",
+        "pentest / 2 enter the Pentest dashboard",
         "iam         list identity and access tools",
         "clear       clear the screen",
         "up / down   recall earlier commands",
       ],
     };
+  }
+  if (cmd === "status") {
+    return { lines: [
+      `READY / ${DASHBOARDS.length} dashboard entries available`,
+      `INDEXED / ${IAM_TOOLS.length} IAM tools`,
+      "SESSION / Public portfolio visitor",
+      "Choose soc, pentest, or iam to explore.",
+    ] };
   }
   if (cmd === "whoami") {
     return {
