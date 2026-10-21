@@ -64,6 +64,26 @@ const IAM_TOOLS = [
   },
 ];
 
+const COMPLIANCE_TOOLS = [
+  {
+    repo: "fiduciary-cyber-program",
+    title: "Fiduciary Cyber Program",
+    description: "Checklist for a fiduciary firm: policy, safeguards, vendors, incident response, and evidence.",
+  },
+];
+
+function renderCompliance() {
+  const grid = document.getElementById("compliance-grid");
+  grid.innerHTML = COMPLIANCE_TOOLS.map((tool) => `
+    <a class="hub-card" href="https://github.com/sotithsim4-art/${tool.repo}" target="_blank" rel="noopener">
+      <div class="project-tag high">COMPLIANCE</div>
+      <h2>${tool.title}</h2>
+      <p>${tool.description}</p>
+      <span class="hub-card-cta">VIEW ON GITHUB →</span>
+    </a>
+  `).join("");
+}
+
 function renderIam() {
   const grid = document.getElementById("iam-grid");
   grid.innerHTML = IAM_TOOLS.map((tool) => `
@@ -145,10 +165,11 @@ function bootSequenceLines() {
     "[ OK ] Portfolio environment ready",
     ...DASHBOARDS.map((d) => `[ OK ] ${d.title} / ${d.tag.toLowerCase()}`),
     `[ OK ] ${IAM_TOOLS.length} identity &amp; access tools indexed`,
+    "[ OK ] fiduciary cyber program",
     "",
     "MISSION: Detect threats. Investigate signals. Protect systems.",
     "",
-    "Choose your path: soc / pentest / iam",
+    "Choose your path: soc / pentest / iam / compliance",
     "Type help for commands. Use Up / Down for history.",
   ];
 }
@@ -160,15 +181,16 @@ function runHubCommand(raw) {
   if (cmd === "help") {
     return {
       lines: [
-        "help        show this list",
-        "status      portfolio availability",
-        "whoami      operator profile",
-        "ls          list dashboards",
-        "soc / 1     enter the SOC dashboard",
-        "pentest / 2 enter the Pentest dashboard",
-        "iam         list identity and access tools",
-        "clear       clear the screen",
-        "up / down   recall earlier commands",
+        "help         show this list",
+        "status       portfolio availability",
+        "whoami       operator profile",
+        "ls           list dashboards",
+        "soc / 1      enter the SOC dashboard",
+        "pentest / 2  enter the Pentest dashboard",
+        "iam          list identity and access tools",
+        "compliance   open the fiduciary cyber program",
+        "clear        clear the screen",
+        "up / down    recall earlier commands",
       ],
     };
   }
@@ -177,7 +199,7 @@ function runHubCommand(raw) {
       `READY / ${DASHBOARDS.length} dashboard entries available`,
       `INDEXED / ${IAM_TOOLS.length} IAM tools`,
       "SESSION / Public portfolio visitor",
-      "Choose soc, pentest, or iam to explore.",
+      "Choose soc, pentest, iam, or compliance to explore.",
     ] };
   }
   if (cmd === "whoami") {
@@ -211,10 +233,16 @@ function runHubCommand(raw) {
       anchor: "iam",
     };
   }
+  if (cmd === "compliance") {
+    return {
+      lines: COMPLIANCE_TOOLS.map((tool) => `${tool.repo.padEnd(28, " ")}${tool.title}`),
+      anchor: "compliance",
+    };
+  }
   if (cmd === "clear") return { lines: [], clear: true };
   return { lines: [`command not found: ${line}`, "Type help."] };
 }
 
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = { runHubCommand, DASHBOARDS, IAM_TOOLS, REG_SUPPORT_TOOLS, bootSequenceLines };
+  module.exports = { runHubCommand, DASHBOARDS, IAM_TOOLS, COMPLIANCE_TOOLS, REG_SUPPORT_TOOLS, bootSequenceLines };
 }

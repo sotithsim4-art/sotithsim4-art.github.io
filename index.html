@@ -43,7 +43,7 @@
         <div id="terminal-output" role="log" aria-label="Hub terminal output" aria-live="off"></div>
         <form id="hub-prompt" class="hub-prompt" hidden>
           <label for="hub-command">sotith@hub:~$</label>
-          <input id="hub-command" name="command" autocomplete="off" spellcheck="false" aria-label="Hub command" placeholder="Try soc, pentest, iam, or help" autocapitalize="off" />
+          <input id="hub-command" name="command" autocomplete="off" spellcheck="false" aria-label="Hub command" placeholder="Try soc, pentest, iam, compliance, or help" autocapitalize="off" />
         </form>
         <span class="terminal-cursor" id="boot-cursor">█</span>
       </div>
@@ -68,6 +68,11 @@
       </div>
     </section>
 
+    <section class="iam-section" id="compliance">
+      <h2 class="section-title">COMPLIANCE</h2>
+      <div class="hub-grid" id="compliance-grid"></div>
+    </section>
+
     <div class="hub-footer">
       <a href="https://github.com/sotithsim4-art" target="_blank">GitHub</a>
       <a href="https://tryhackme.com/p/sotithsim4" target="_blank">TryHackMe</a>
@@ -81,6 +86,7 @@
     renderHub();
     renderIam();
     initRegSupport();
+    renderCompliance();
 
     const lines = bootSequenceLines();
     const output = document.getElementById("terminal-output");
