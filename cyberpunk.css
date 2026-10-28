@@ -12,3 +12,13 @@ body.zen{--bg:#090d18;--sidebar-bg:#0c1220;--card-bg:#101a2a;--accent:#69e6ff;--
 .zen .system-status,.zen .system-status.critical{color:#9cacc0;border-color:#27354b}.zen .hub-prompt input{color:#b0eaff}.zen .hub-prompt label{color:#8de8ff}.zen .hub-card-icon{filter:grayscale(1);opacity:.8}.zen .hub-card-cta{color:#97eaff}
 .zen a:focus-visible,.zen input:focus-visible,.zen summary:focus-visible{outline-color:#f2a3d5}.zen .section-title{color:#a4bad0}.zen .project-link{color:#9ae7fc}
 @media(max-width:900px){.zen .stat-card:nth-child(-n+2){border-color:var(--border)}}
+
+/* Night-shift banner shown after the intro */
+.night-banner{position:relative;margin:0 0 36px;border:1px solid #2b4256;border-radius:6px;overflow:hidden;background:#06090f;box-shadow:0 0 0 1px #ff4fd81f,0 0 36px #5ce1ff1f,0 0 70px #c04bff14;animation:nightIn .9s ease both}
+.night-banner img{display:block;width:100%;height:auto;max-height:46vh;object-fit:cover;object-position:60% 50%}
+.night-banner::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,transparent 55%,#090d18 100%),repeating-linear-gradient(to bottom,#ffffff06 0,#ffffff06 1px,transparent 1px,transparent 3px)}
+.night-banner figcaption{position:absolute;left:18px;bottom:14px;z-index:1;font:600 11px Consolas,'Courier New',monospace;letter-spacing:.2em;color:#9beaff;text-shadow:0 0 12px #5ee6ff80}
+.night-banner figcaption span{color:#ff8bd6}
+@keyframes nightIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.night-banner{animation:none}}
+@media(max-width:600px){.night-banner img{max-height:none;aspect-ratio:16/10}.night-banner figcaption{font-size:9px;left:12px;bottom:10px}}
