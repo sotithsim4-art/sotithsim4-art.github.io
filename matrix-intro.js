@@ -14,22 +14,39 @@
   main.inert = true;
   document.body.style.overflow = 'hidden';
   skip.focus({preventScroll: true});
+  const GLYPHS = '01ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎ<>/:=+*'.split('');
+  const FS = 16;
+  let speeds = [], prevPx = [], prevG = [];
   function resize() {
     width = window.innerWidth; height = window.innerHeight;
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = width * ratio; canvas.height = height * ratio;
     if (ctx) ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-    drops = Array.from({length: Math.ceil(width / 22)}, () => Math.random() * -60);
+    const cols = Math.ceil(width / FS);
+    drops = Array.from({length: cols}, () => Math.random() * -50);
+    speeds = Array.from({length: cols}, () => .45 + Math.random() * .75);
+    prevPx = []; prevG = [];
   }
   function rain(time) {
     if (finished || reduced.matches || !ctx) return;
-    if (time - last > 55) {
-      ctx.fillStyle = 'rgba(2,7,4,.09)'; ctx.fillRect(0, 0, width, height);
-      ctx.font = '15px monospace';
+    if (time - last > 50) {
+      ctx.fillStyle = 'rgba(1,5,3,.075)'; ctx.fillRect(0, 0, width, height);
+      ctx.font = FS + 'px monospace';
       drops.forEach((y, i) => {
-        ctx.fillStyle = Math.random() > .97 ? '#d4ffdf' : '#22c65a';
-        ctx.fillText('01アイウエオカキクケコ'[Math.floor(Math.random() * 12)], i * 22, y * 22);
-        drops[i] = y * 22 > height && Math.random() > .975 ? 0 : y + .7;
+        const g = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+        const px = Math.round(y) * FS;
+        const prev = prevPx[i];
+        if (prev !== px) {
+          if (prev !== undefined) {
+            ctx.fillStyle = 'rgba(1,5,3,.9)'; ctx.fillRect(i * FS, prev - FS + 2, FS, FS);
+            ctx.fillStyle = Math.random() > .93 ? '#7dffa6' : '#1fbf55';
+            ctx.fillText(prevG[i], i * FS, prev);
+          }
+          ctx.fillStyle = '#e6fff0';
+          ctx.fillText(g, i * FS, px);
+          prevPx[i] = px; prevG[i] = g;
+        }
+        drops[i] = px > height && Math.random() > .96 ? Math.random() * -12 : y + speeds[i];
       });
       last = time;
     }
@@ -54,10 +71,12 @@
     if (finished) return;
     const row = document.createElement('p'); row.textContent = steps[step]; log.appendChild(row);
     step++; progress.style.width = `${step * 25}%`;
+    if (step === 4) log.lastElementChild.classList.add('granted');
     status.textContent = step === 4 ? 'ACCESS GRANTED / 100%' : `SYSTEM BOOT / ${step * 25}%`;
     timer = window.setTimeout(step === steps.length ? finish : advance, reduced.matches ? 160 : 1600);
   }
   resize(); window.addEventListener('resize', resize);
+  if (window.SimTheme) { window.SimTheme.decode(document.querySelector('#matrix-intro h2'), {duration: 1100, delay: 250}); window.SimTheme.decode(document.querySelector('.matrix-eyebrow'), {duration: 800}); }
   if (!reduced.matches && ctx) frame = requestAnimationFrame(rain);
   advance();
 })();
