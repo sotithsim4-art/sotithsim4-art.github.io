@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Sotith Sim | Cybersecurity Hub</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23020b07'/%3E%3Crect x='1' y='1' width='30' height='30' rx='3' fill='none' stroke='%2339ff88' stroke-width='2'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='20' font-weight='700' text-anchor='middle' fill='%2339ff88'%3ES%3C/text%3E%3C/svg%3E" />
   <style>.pill-side,.pill-rain{position:fixed;opacity:0;pointer-events:none}</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="zen.css" />
-  <link rel="stylesheet" href="cyberpunk.css?v=20261027b" />
-  <link rel="stylesheet" href="matrix-intro.css" />
+  <link rel="stylesheet" href="cyberpunk.css?v=20261027m" />
+  <link rel="stylesheet" href="matrix-intro.css?v=20261027m" />
 </head>
 <body class="hub-body zen">
   <section id="matrix-intro" aria-label="Portfolio startup">
@@ -86,7 +90,7 @@
     <span class="pill-sub">Take it and stay in the SOC. Protect the system.</span>
     <span class="pill-quote">&gt; The story ends. You wake up and defend the network.<i class="pill-caret">_</i></span>
   </a>
-  <script src="pills.js?v=20261027b" defer></script>
+  <script src="pills.js?v=20261027m" defer></script>
 
   <main class="hub-main">
 
@@ -98,8 +102,26 @@
     <div class="hub-header">
       <div class="logo">CYBERSEC</div>
       <h1 class="hub-title">SELECT DASHBOARD</h1>
-      <p class="hub-tagline">Sotith Sim — SOC Analyst • Army Veteran • Cybersecurity</p>
+      <p class="hub-tagline"><b>Sotith Sim</b><span class="sep">/</span>SOC Analyst<span class="sep">/</span>Army Veteran<span class="sep">/</span>Cybersecurity</p>
     </div>
+
+    <section class="pill-choose" aria-label="Choose your pill">
+      <p class="pill-choose-title">CHOOSE YOUR PILL</p>
+      <div class="pill-choose-grid">
+        <a class="pill-card pill-card-red" href="pentest-dashboard.html" aria-label="Red pill, offensive: open the pentest dashboard">
+          <span class="pc-tag">[ OFFENSIVE ]</span>
+          <span class="pc-capsule" aria-hidden="true"><i class="pc-dark">01ア10</i><i class="pc-lit"></i></span>
+          <span class="pc-label">RED PILL</span>
+          <span class="pc-sub">Pentest dashboard</span>
+        </a>
+        <a class="pill-card pill-card-blue" href="soc-dashboard.html" aria-label="Blue pill, defensive: open the SOC dashboard">
+          <span class="pc-tag">[ DEFENSIVE ]</span>
+          <span class="pc-capsule" aria-hidden="true"><i class="pc-dark">10ネ01</i><i class="pc-lit"></i></span>
+          <span class="pc-label">BLUE PILL</span>
+          <span class="pc-sub">SOC dashboard</span>
+        </a>
+      </div>
+    </section>
 
     <div class="hub-terminal">
       <div class="terminal-header">
@@ -149,8 +171,9 @@
 
   </main>
 
-  <script src="matrix-intro.js"></script>
-  <script src="dashboards.js"></script>
+  <script src="theme.js?v=20261027m"></script>
+  <script src="matrix-intro.js?v=20261027m"></script>
+  <script src="dashboards.js?v=20261027m"></script>
   <script>
     renderHub();
     renderIam();
@@ -199,7 +222,7 @@
       document.getElementById("boot-cursor").hidden = true;
       form.hidden = false;
       title.textContent = "HUB SHELL";
-      input.focus();
+      input.focus({ preventScroll: true });
 
       input.addEventListener("keydown", (event) => {
         if (event.key !== "ArrowUp" && event.key !== "ArrowDown") return;

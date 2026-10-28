@@ -1,6 +1,8 @@
 (function(){
   var body=document.body;
-  function on(){body.classList.add('pills-on');startRain();}
+  var wide=window.matchMedia('(min-width: 1281px)');
+  function maybeRain(){if(wide.matches)startRain();}
+  function on(){body.classList.add('pills-on');maybeRain();if(wide.addEventListener)wide.addEventListener('change',maybeRain);}
   if(document.getElementById('matrix-intro')&&!document.getElementById('matrix-intro').classList.contains('leaving')){window.addEventListener('matrix:ready',on,{once:true});}else{on();}
   var started=false;
   function startRain(){
@@ -11,7 +13,7 @@
       function size(){c.width=c.clientWidth;c.height=c.clientHeight;cols=Math.max(1,Math.floor(c.width/fs));drops=[];for(var i=0;i<cols;i++)drops[i]=Math.random()*-40;}
       size();window.addEventListener('resize',size);
       setInterval(function(){
-        if(document.hidden||!c.clientWidth)return;
+        if(document.hidden||!c.clientWidth||!wide.matches)return;
         x.fillStyle='rgba(6,9,15,0.14)';x.fillRect(0,0,c.width,c.height);
         x.font=fs+'px monospace';
         for(var i=0;i<cols;i++){
